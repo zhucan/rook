@@ -43,6 +43,9 @@ type DataPathMap struct {
 	// The log dir is always /var/log/ceph. If logs are not persisted to the
 	// host, logs are not shared between containers via empty dir or any other mechanism.
 	HostLogAndCrashDir string
+
+	// HostSocketDir dir represents the Ceph admin socket allows you to query a daemon via a socket interface.
+	HostSocketDir string
 }
 
 // NewStatefulDaemonDataPathMap returns a new DataPathMap for a daemon which requires a persistent
@@ -70,6 +73,7 @@ func NewStatelessDaemonDataPathMap(
 		HostDataDir:        "",
 		ContainerDataDir:   cephDataDir(daemonType, daemonID),
 		HostLogAndCrashDir: path.Join(dataDirHostPath, namespace),
+		HostSocketDir:      path.Join("/var/run/ceph"),
 	}
 }
 
